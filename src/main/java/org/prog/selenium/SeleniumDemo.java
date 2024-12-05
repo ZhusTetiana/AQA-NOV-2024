@@ -16,17 +16,12 @@ public class SeleniumDemo {
     public static void main(String[] args) {
         WebDriver driver = null;
         try {
-            // 1. open browser
+
             driver = new ChromeDriver();
-            // 2. open google.com
-            driver.get("https://google.com/");
-            // 3. enter 'ben affleck' to search field
-            WebElement cookiesLink = driver.findElement(By.xpath("//a[contains(@href, 'technologies/cookies')]"));
-            if (cookiesLink.isDisplayed()) {
-                driver.findElements(By.tagName("button")).get(4).click();
-            }
-            WebElement searchInput = driver.findElement(By.name("q"));
-            searchInput.sendKeys("Ben Affleck");
+            driver.get("https://allo.ua/");
+
+            WebElement searchInput = driver.findElement(By.name("search"));
+            searchInput.sendKeys("Apple iPhone 16 Pro 128GB Desert Titanium (MYNF3)");
             searchInput.sendKeys(Keys.ENTER);
 
             List<WebElement> searchHeaders = new WebDriverWait(driver, Duration.ofSeconds(5L))
@@ -34,23 +29,20 @@ public class SeleniumDemo {
 
             int count = 0;
             for (WebElement webElement : searchHeaders) {
-                if (webElement.getText().contains("Ben Affleck")) {
+                if (webElement.getText().contains("Apple iPhone 16 Pro")) {
                     count++;
                 }
             }
 
-            if (count > 3) {
-                System.out.println("Ben Found!");
+            if (count >= 0) {
+                System.out.println("Apple iPhone 16 Found!");
             } else {
-                System.out.println("Ben not found!");
+                System.out.println("Apple iPhone 16 not found!");
             }
         } finally {
             if (driver != null) {
                 driver.quit();
             }
         }
-
-        // 4. press enter for search field
-        // 5. check search results
     }
 }
